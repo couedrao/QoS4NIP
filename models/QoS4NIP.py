@@ -8,8 +8,7 @@ host_nb = 4
 host_size = 7
 n_obj = app_nb * 3 + 2
 
-#np.random.seed(42)
-#random.seed(a=42)
+
 # initial rand
 h_r_usage = np.random.randint(15, 25, size=(2, host_nb))
 vnf_r_usage = np.random.randint(15, 25, size=(2, host_size - 2))

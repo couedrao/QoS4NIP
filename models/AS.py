@@ -8,7 +8,7 @@ f = ["Con", "Red", "Dro", "Sch", "Del"]
 n_obj = app_nb * 3 + 2
 
 #np.random.seed(42)
-# random.seed(a=42)
+#random.seed(a=42)
 penalty = 1000
 
 # initial rand

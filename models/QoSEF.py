@@ -8,8 +8,6 @@ host_nb = 4
 host_size = 7
 f = ["Con", "Red", "Dro", "Sch", "Del"]
 
-#np.random.seed(42)
-# random.seed(a=42)
 
 # initial rand
 h_r_usage = np.random.randint(15, 25, size=(2, host_nb))
