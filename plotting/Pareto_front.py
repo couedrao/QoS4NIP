@@ -17,10 +17,10 @@ colors = ['#a6cee3', '#1f78b4', '#b2df8a', '#33a02c', '#fb9a99', '#e31a1c', '#fd
           '#ffff99', '#b15928', 'k']
 sns.set_palette(palette=colors)
 alpha = 0.5
+cmap = LinearSegmentedColormap.from_list('Custom', ('#deebf7', '#9ecae1'), 2)
 f = ["Conditioner", "Redirector", "Dropper", "Scheduler", "Shaper", "Scale Up", "Scale In"]
 xlab = ['Server', 'GW C', 'GW C1', 'GW C11']
 lim = 200
-# delta = ["l", "u", "t"]
 figname = ['a', 'b', 'c', 'd']
 fignumb = ['10', '11', '12', '13']
 patterns = cycle(["oo", "xx", "||||", "++", "//"])
@@ -33,7 +33,6 @@ slolabel = ['Latency (ms)', r'Availability ($\%$)', 'Throughput (req/sec)']
 num_locations = 3
 plt.rcParams['hatch.linewidth'] = 0.1
 alg_titile = ['FCFS', 'AS', 'QoSEF', 'QoSEFe', 'QoS4NIP']
-
 app_nb = 3
 host_nb = 4
 host_size = 7
@@ -109,11 +108,6 @@ class visualisation():
                     alg2['Scheme'] = alg2.apply(lambda x: alg_titile[3], axis=1)
                     alg3['Scheme'] = alg3.apply(lambda x: alg_titile[4], axis=1)
                     df3 = pd.concat([df3, algz.append([alg0, alg1, alg2, alg3], ignore_index=True)], ignore_index=True)
-
-            #print(df1)
-            #print(df2)
-            #print(df3)
-
             f, ax = plt.subplots(figsize=(4.4, 3.1))
             sns.catplot(x='Application', y=slolabel[0], hue='Scheme', data=df1, ax=ax, kind="bar", ci="sd",
                         errwidth=0.5,
@@ -183,7 +177,6 @@ class visualisation():
         xy_arr.append((0, 0))
         if min([psolutions[0].__len__(), psolutions[1].__len__(), psolutions[2].__len__(),
                 psolutions[3].__len__()]) >= lim:
-            ####################################################################
             algz = pd.DataFrame({xlabel[0]: [0], xlabel[1]: [0]})
             alg0 = pd.DataFrame({xlabel[0]: [s.objectives[n_obj - 1] for s in psolutions[0][0:lim]],
                                  xlabel[1]: [s.objectives[n_obj - 2] for s in psolutions[0][0:lim]]})
@@ -236,8 +229,6 @@ class visualisation():
             f.savefig(r'figs/fig8a.svg', bbox_inches='tight')
             f.show()
 
-            # ******************************************#
-            cmap = LinearSegmentedColormap.from_list('Custom', ('#deebf7', '#9ecae1'), 2)
             objs = []
             for i in range(0, host_nb):
                 for j in range(0, host_size):
@@ -250,8 +241,7 @@ class visualisation():
             data_2 = np.array([np.reshape(np.array(psolutions[2][select[2]].variables).astype(int), n_vars)])
             data_3 = np.array([np.reshape(np.array(psolutions[3][select[3]].variables).astype(int), n_vars)])
             data = np.concatenate((data_z, data_0, data_1, data_2, data_3), axis=0)
-            sns.heatmap(data, ax=ax, cmap=cmap, linewidths=True, cbar=False, annot=True,
-                        fmt="d", square=True)
+            sns.heatmap(data, ax=ax, cmap=cmap, linewidths=True, cbar=False, annot=True, fmt="d", square=True)
             ax.set_xlabel('Decision Variables')
             ax.tick_params(left=False, bottom=True)
             ax.set_xticklabels(objs, rotation=0)
