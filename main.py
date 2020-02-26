@@ -1,8 +1,7 @@
 from platypus import *
 
-import Pareto_Front
+from plotting import Pareto_front
 from models import QoSEF, QoS4NIP, AS, QoSEFe
-import numpy as np
 
 app_nb = 3
 n_obj = app_nb * 3 + 2
@@ -33,6 +32,6 @@ if __name__ == '__main__':
             all_fronts.append(front)
 
     # visualize the results
-    visualize = Pareto_Front.visualisation(all_fronts, problems)
+    visualize = Pareto_front.visualisation(all_fronts, problems)
     visualize.displayQoS()
     visualize.displayCosts()
